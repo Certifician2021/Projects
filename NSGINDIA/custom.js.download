@@ -1,0 +1,230 @@
+(function ($) {
+ "use strict";
+$(document).ready(function(){
+	  
+		/*
+		Mean Menu Responsive
+		============================*/		
+        jQuery('nav#main-menu').meanmenu();				
+		/*
+		Founder Slide Crousel
+		============================*/ 	
+		  $(".all-founder").owlCarousel({
+			autoplay: true, 
+			pagination:false,
+			nav:false, 
+			dots:true, 
+			margin:30,
+			items :1,
+		  }); 		  
+			
+		/*
+		Testimonial Crousel
+		============================*/ 	
+		  $(".all-testimonial").owlCarousel({
+			autoplay: true, 
+			pagination:false,
+			nav:false, 
+			dots:true, 
+			items :2,
+			responsive:{
+				0:{
+					items:1
+				},
+				600:{
+					items:1
+				},
+				768:{
+					items:2
+				},				
+				1000:{
+					items:2
+				}
+			}			
+		  }); 			
+		/*
+		All Team Crousel
+		============================*/ 	
+		  $(".all-team").owlCarousel({
+			autoplay: true, 
+			pagination:false,
+			nav:true, 
+			dots:false, 
+			navText:["<i class='fa fa-angle-double-left'></i>","<i class='fa fa-angle-double-right'></i>"],
+			items :4,
+			responsive:{
+				0:{
+					items:1
+				},
+				600:{
+					items:2
+				},
+				768:{
+					items:3
+				},				
+				1000:{
+					items:4
+				}
+			}			
+		  }); 			
+	
+		/*
+		Patner Crousel
+		============================*/ 	
+		  $(".all-patner").owlCarousel({
+			autoplay: true, 
+			pagination:false,
+			nav:true, 
+			dots:false, 
+			items :4,
+			navText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+			responsive:{
+				0:{
+					items:2
+				},
+				600:{
+					items:2
+				},
+				768:{
+					items:2
+				},				
+				992:{
+					items:4
+				},				
+				1000:{
+					items:4
+				}
+			}
+		  }); 					
+		/*
+		Slider Crousel
+		============================*/ 
+		$(".all-slide").owlCarousel({
+            items: 1,
+            nav: true,
+            dots: true,
+            autoplay: true,
+            loop: true,
+            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+            mouseDrag: false,
+            touchDrag: false,
+        });
+        
+        $(".all-slide").on("translate.owl.carousel", function(){
+            $(".slider-text *").removeClass("animated fadeInUp").css("opacity", "0");
+            $(".slider-text *").removeClass("animated fadeInDown").css("opacity", "0");
+        });
+        
+        $(".all-slide").on("translated.owl.carousel", function(){
+            $(".slider-text *").addClass("animated fadeInUp").css("opacity", "1");
+            $(".slider-text *").addClass("animated fadeInDown").css("opacity", "1");
+        });
+		/*
+		Donor Testimonial Crousel
+		============================*/ 	
+		  $(".donor-testimonial").owlCarousel({
+			autoplay: true, 
+			pagination:false,
+			nav:false, 
+			dots:true, 
+			items :1,
+			responsive:{
+				0:{
+					items:1
+				},
+				600:{
+					items:1
+				},
+				768:{
+					items:1
+				},				
+				1000:{
+					items:1
+				}
+			}			
+		  }); 	
+
+    			
+		/*
+		scrollUp
+		============================*/	
+		$.scrollUp({
+			scrollText: '<i class="fa fa-long-arrow-up"></i>',
+			easingType: 'linear',
+			scrollSpeed: 900,
+			animation: 'fade'
+		});	
+		/*
+		Counter Js
+		============================*/ 
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000			
+        });
+		
+		/*
+		Magnific Popup
+		============================*/ 		
+        $('.gallery-photo').magnificPopup({
+            type: 'image',
+            gallery: {
+              enabled: true
+            },
+        });	 
+		/*
+		Vedio Magnific Popup
+		============================*/ 		
+        $('.vedio-play').magnificPopup({type: 'video'});				
+		/*
+		Project Gallery Js
+		============================*/			
+		$(".filtr-container").isotope({
+		itemSelector: '.filtr-item',
+		layoutMode: 'fitRows',
+		});
+		$('ul.simplefilter li').on("click",function(){
+		$("ul.simplefilter li").removeClass("active");
+		$(this).addClass("active");
+		 
+		var selector = $(this).attr('data-filter');
+		$(".filtr-container").isotope({
+		filter: selector,
+		animationOptions: {
+		duration: 750,
+		easing: 'linear',
+		queue: false,
+		}
+		});
+		return false;
+		});
+		/*
+		Google map Js
+		============================*/ 	
+		google.maps.event.addDomListener(window, 'load', init);
+	
+		function init() {
+			var mapOptions = {
+				zoom: 11,
+				center: new google.maps.LatLng(40.6700, -73.9400),
+				styles: [{"featureType":"administrative.country","elementType":"geometry","stylers":[{"visibility":"simplified"},{"hue":"#ff0000"}]}]
+			};
+			var mapElement = document.getElementById('map_id');
+			var map = new google.maps.Map(mapElement, mapOptions);
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(40.6700, -73.9400),
+				map: map,
+				title: 'New York'
+			});
+		}	
+		/*
+		Preeloader
+		============================*/
+		$(window).on("load", function() {
+			$('#preloader').fadeOut();
+			$('#preloader-status').delay(200).fadeOut('slow');
+			$('body').delay(200).css({'overflow-x':'hidden'});
+		});		
+		
+	});	
+})(jQuery);
+
